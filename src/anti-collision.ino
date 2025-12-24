@@ -1,8 +1,8 @@
 #define TRIG_PIN 9
 #define ECHO_PIN 10
 
-#define LED_GREEN 2
-#define LED_YELLOW 3
+#define LED_BLUE 2
+#define LED_GREEN 3
 #define LED_RED 4
 
 #define BUZZER_PIN 6
@@ -29,8 +29,8 @@ void setup() {
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 
+  pinMode(LED_BLUE, OUTPUT);
   pinMode(LED_GREEN, OUTPUT);
-  pinMode(LED_YELLOW, OUTPUT);
   pinMode(LED_RED, OUTPUT);
 
   pinMode(BUZZER_PIN, OUTPUT);
@@ -55,16 +55,16 @@ void loop() {
   int potValue = analogRead(POT_PIN);
   float criticalDistance = map(potValue, 0, 1023, 30, 45);
 
+  digitalWrite(LED_BLUE, LOW);
   digitalWrite(LED_GREEN, LOW);
-  digitalWrite(LED_YELLOW, LOW);
   digitalWrite(LED_RED, LOW);
 
   if (distance < 0 || distance > criticalDistance * 1.5) {
-    digitalWrite(LED_GREEN, HIGH);
+    digitalWrite(LED_BLUE, HIGH);
     digitalWrite(BUZZER_PIN, LOW);
   } 
   else if (distance > criticalDistance) {
-    digitalWrite(LED_YELLOW, HIGH);
+    digitalWrite(LED_GREEN, HIGH);
     digitalWrite(BUZZER_PIN, HIGH);
     delay(200);
     digitalWrite(BUZZER_PIN, LOW);
